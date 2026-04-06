@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Puzzle Enumerator</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0f2c, #050816);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+        }
+
+        .container {
+            width: 700px;
+            margin: 80px auto;
+            padding: 40px;
+            background: #0f172a;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        h1 {
+            color: #38bdf8;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        label {
+            width: 40%;
+            text-align: left;
+            color: #cbd5f5;
+        }
+
+        input {
+            width: 55%;
+            padding: 12px;
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 6px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 5px #38bdf8;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+
+        button {
+            width: 45%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .output-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #020617;
+            border-radius: 8px;
+            min-height: 150px;
+            text-align: left;
+            color: #22d3ee;
+            font-family: monospace;
+            border: 1px solid #1e293b;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>PUZZLE ENUMERATOR</h1>
+
+    <form action="/solve" method="post">
+
+        <div class="row">
+            <label>Enter Elements</label>
+            <input type="text" name="elements" placeholder="e.g. 1 2 3" required>
+        </div>
+
+        <div class="row">
+            <label>Enter Constraints (e.g. 1 2, 2 3)</label>
+            <input type="text" name="constraints" placeholder="e.g. 1 2, 2 3">
+        </div>
+
+        <div class="buttons">
+            <button type="submit">Generate</button>
+            <button type="reset">Clear</button>
+        </div>
+
+    </form>
+
+    <!-- RESULTS -->
+    <div class="output-box" th:if="${solutions != null}">
+
+        <!-- Constraints -->
+        <div th:each="c : ${constraints}">
+            ➤ <span th:text="${c}"></span><br>
+        </div>
+
+        <br>
+
+        <!-- Solutions Heading -->
+        <b>Solutions:</b>
+        <br><br>
+
+        <!-- Solutions List -->
+        <div th:each="sol : ${solutions}">
+            <span th:text="${sol}"></span><br>
+        </div>
+
+        <br>
+
+        <!-- Total at Bottom -->
+        <b>Total Solutions: <span th:text="${count}"></span></b>
+
+    </div>
+
+</div>
+
+</body>
+</html>

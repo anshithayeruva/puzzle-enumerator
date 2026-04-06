@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Results</title>
+</head>
+<body>
+
+<h2>Results</h2>
+
+<h3>Constraints:</h3>
+<ul>
+    <li th:each="c : ${constraints}" th:text="${c}"></li>
+</ul>
+
+<br>
+
+<h3>Total Solutions: <span th:text="${count}"></span></h3>
+
+<h3>Solutions:</h3>
+<ul>
+    <li th:each="sol : ${solutions}" th:text="${sol}"></li>
+</ul>
+
+<br>
+<a href="/">Go Back</a>
+
+</body>
+</html>
